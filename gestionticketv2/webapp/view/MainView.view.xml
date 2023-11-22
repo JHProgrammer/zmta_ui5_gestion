@@ -1,0 +1,71 @@
+<mvc:View controllerName="cap.gestionticketv2.controller.MainView"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:unified="sap.ui.unified"
+    xmlns="sap.m"
+    xmlns:main="sap.ui.webc.main">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <main:TabContainer height="100%" headerBackgroundDesign="Solid">
+                <main:Tab additionalText="Tickets" icon="menu2" text="Calendario">
+                    <VBox class="sapUiSmallMargin">
+                        <PlanningCalendar
+                                id="PC1"
+                                startDate="{path: '/startDate'}"
+                                rows="{path: '/people'}"
+                                appointmentsVisualization="Filled"
+                                appointmentSelect="handleAppointmentSelect"
+                                showEmptyIntervalHeaders="false"
+                                intervalSelect="handleAppointmentAddWithContext"
+                                height="100%">
+                            <toolbarContent>
+                                <Title text="Title" titleStyle="H4"/>
+                                <Button id="addButton" icon="sap-icon://add" press="handleAppointmentCreate" tooltip="Add"/>
+                            </toolbarContent>
+                            <rows>
+                                <PlanningCalendarRow
+                                        icon="{pic}"
+                                        title="{name}"
+                                        text="{role}"
+                                        appointments="{path : 'appointments', templateShareable: false}"
+                                        intervalHeaders="{path: 'headers', templateShareable: false}">
+                                    <appointments>
+                                        <unified:CalendarAppointment
+                                                startDate="{start}"
+                                                endDate="{end}"
+                                                icon="{pic}"
+                                                title="{title}"
+                                                text="{info}"
+                                                type="{type}"
+                                                tentative="{tentative}">
+                                        </unified:CalendarAppointment>
+                                    </appointments>
+                                    <intervalHeaders>
+                                        <unified:CalendarAppointment
+                                                startDate="{start}"
+                                                endDate="{end}"
+                                                icon="{pic}"
+                                                title="{title}"
+                                                type="{type}">
+                                        </unified:CalendarAppointment>
+                                    </intervalHeaders>
+                                </PlanningCalendarRow>
+                            </rows>
+                        </PlanningCalendar>
+                    </VBox>
+                </main:Tab>
+                <main:Tab additionalText="Mantenimiento" icon="menu2" text="Clientes">
+                    <Button icon="sys-monitor" text="Monitors" />
+                    <Button icon="my-view" text="HD Monitors" />
+                </main:Tab>
+                <main:Tab additionalText="Mantenimiento" icon="menu2" text="Consultores">
+                    <Button icon="keyboard-and-mouse" text="Keyboards" />
+                </main:Tab>
+                <main:Tab additionalText="Mantenimiento" icon="menu2" text="Lideres">
+                    <Button icon="keyboard-and-mouse" text="Keyboards" />
+                </main:Tab>
+            </main:TabContainer>
+            
+        </content>
+    </Page>
+</mvc:View>
