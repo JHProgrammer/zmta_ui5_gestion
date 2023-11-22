@@ -82,6 +82,9 @@ sap.ui.define(
         request.token = token;
         request["Content-Type"] = "application/json";
         request["Access-Control-Allow-Origin"] = "*";
+        if (constantes.isLocal){
+          request["Authorization"] = constantes.tokenConsulta;
+        }
         return request;
       },
 
@@ -211,6 +214,7 @@ sap.ui.define(
               constantes.urlApiGatewayLocal
             );
           }
+          
           const rawResponse = await fetch(path, {
             method: "GET",
             headers: oHeader,
@@ -240,7 +244,7 @@ sap.ui.define(
               constantes.urlApiGatewayLocal
             );
           }
-          const rawResponse = await fetch(path, {
+          let rawResponse = await fetch(path, {
             method: "GET",
             headers: oHeader,
             mode: "cors",

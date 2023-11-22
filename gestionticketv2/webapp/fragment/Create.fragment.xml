@@ -13,16 +13,38 @@
 			class="sapUiContentPadding"
 			width="100%">
 			<CheckBox id="isIntervalAppointment" text="Interval appointment" select="handleAppointmentTypeChange"/>
-			<Label text="Select person: " labelFor="selectPerson"/>
+			<Label text="Seleccionar consultor: " labelFor="selectPerson"/>
 			<Select
-					id="selectPerson"
+					id="selectConsultor"
 					forceSelection="false"
 					change="handleChangeSelect"
 					width="100%"
 					items="{
-						path: '/people'
+						path: 'localModel>/aConsultores'
 					}">
-				<core:Item key="{name}" text="{name}"/>
+				<core:Item key="{ID}" text="{localModel>Nombre} : {localModel>Puesto}"/>
+			</Select>
+			<Label text="Seleccionar Cliente: " labelFor="selectCliente"/>
+			<Select
+					id="selectCliente"
+					forceSelection="false"
+					change="handleChangeSelect"
+					width="100%"
+					items="{
+						path: 'localModel>/aClientes'
+					}">
+				<core:Item key="{ID}" text="{localModel>Nombre} : {localModel>Gestor}"/>
+			</Select>
+			<Label text="Seleccionar Lider: " labelFor="selectLider"/>
+			<Select
+					id="selectLider"
+					forceSelection="false"
+					change="handleChangeSelect"
+					width="100%"
+					items="{
+						path: 'localModel>/aLideres'
+					}">
+				<core:Item key="{ID}" text="{localModel>Nombre} : {localModel>Plataforma}"/>
 			</Select>
 			<Label text="Title: " labelFor="inputTitle"/>
 			<Input id="inputTitle"/>

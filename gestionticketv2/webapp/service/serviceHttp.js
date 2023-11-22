@@ -17,7 +17,7 @@ sap.ui.define(
         },
         serviceGet: async function (url, oParam, context) {
           let modUrl = oParam.length > 0 ? url + "?" + oParam[0] : url;
-          return await utilHttp.httpGet(modUrl, context);
+          return await utilHttp.httpGet2(modUrl, context);
         },
         serviceGetEntity: async function (url, oParam, context) {
           let modUrl = oParam.length > 0 ? url + "?" + oParam[0] : url;

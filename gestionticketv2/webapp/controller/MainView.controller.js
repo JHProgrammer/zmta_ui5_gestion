@@ -463,14 +463,10 @@ sap.ui.define([
         this.getView().setModel(oModel);
       },
       onAfterRendering: function () {
-        let getCliente = new Promise(this.onGetCliente());
-        let getConsultores = new Promise(this.onGetConsultores());
-        let getLideres = new Promise(this.onGetLideres());
-        // this.onGetCliente();
-        Promise.all([getCliente, getConsultores, getLideres]).then((values) => {
-          console.log(values); // [3, 1337, "foo"]
-          sap.ui.getCore().busyIndicator(0);
-        });
+        this.onGetCliente();
+        this.onGetConsultores();
+        this.onGetLideres();
+        console.log("Final de los 3");
       },
       onGetCliente: async function () {
         var self = this;
@@ -483,7 +479,7 @@ sap.ui.define([
             self
           );
           if (response) {
-            localmodel.setProperty("/aCliente", response);
+            localmodel.setProperty("/aClientes", response);
             // const cliente = response.results;
             // console.log("Cliente",cliente);
             // const listarRolesXGestionticket =
@@ -569,9 +565,9 @@ sap.ui.define([
         } catch (error) { }
       },
       _aDialogTypes: [
-        { title: "Create Appointment", type: "create_appointment" },
-        { title: "Create Appointment", type: "create_appointment_with_context" },
-        { title: "Edit Appointment", type: "edit_appointment" }],
+        { title: "Crear ticket", type: "create_appointment" },
+        { title: "Crear ticket", type: "create_appointment_with_context" },
+        { title: "Editar ticket", type: "edit_appointment" }],
 
       handleAppointmentSelect: function (oEvent) {
         var oAppointment = oEvent.getParameter("appointment");
@@ -585,7 +581,7 @@ sap.ui.define([
 
       _addNewAppointment: function (oAppointment) {
         var oModel = this.getView().getModel(),
-          sPath = "/people/" + this.byId("selectPerson").getSelectedIndex().toString(),
+          sPath = "/people/" + this.byId("selectConsultor").getSelectedIndex().toString(),
           oPersonAppointments;
 
         if (this.byId("isIntervalAppointment").getSelected()) {
@@ -834,10 +830,10 @@ sap.ui.define([
           oDateTimePickerEnd = this.byId("endDate"),
           oTitleInput = this.byId("inputTitle"),
           oMoreInfoInput = this.byId("moreInfo"),
-          oPersonSelected = this.byId("selectPerson");
+          oPersonSelected = this.byId("selectConsultor");
 
         //Set the person in the first row as selected.
-        oPersonSelected.setSelectedItem(this.byId("selectPerson").getItems()[0]);
+        oPersonSelected.setSelectedItem(this.byId("selectConsultor").getItems()[0]);
         oDateTimePickerStart.setValue("");
         oDateTimePickerEnd.setValue("");
         oDateTimePickerStart.setValueState(ValueState.None);
